@@ -12,7 +12,10 @@
         <DataTemplate DataType="{x:Type models:TemperatureViewModel}">
             <views:TemperatureView/>
         </DataTemplate>
-        <!-- TODO 02 : Ajouter le DataTemplate pour la configuration -->
+        <DataTemplate DataType="{x:Type models:ConfigurationViewModel}">
+            <views:ConfigurationView/>
+        </DataTemplate>
+        <!-- TODO 02 : Ajouter le DataTemplate pour la configuration //FAIT-->
         
         
         <Style x:Key="allMargins">
@@ -25,9 +28,9 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <!-- TODO 07 : Faire les bindings -->
-                <MenuItem Header="Weather Station" Command="" CommandParameter=""/>
-                <MenuItem Header="Preferences..." Command="" CommandParameter=""/>
+                <!-- TODO 07 : Faire les bindings //FAIT -->
+                <MenuItem Header="Weather Station" Command="{Binding ChangePageCommand}" CommandParameter="TemperatureViewModel"/>
+                <MenuItem Header="Preferences..." Command="{Binding ChangePageCommand}" CommandParameter="ConfigurationViewModel"/>
             </MenuItem>
         </Menu>
         <ContentControl Content="{Binding CurrentViewModel}"/>

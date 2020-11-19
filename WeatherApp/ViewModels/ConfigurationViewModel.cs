@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Windows;
 using WeatherApp.Commands;
 
 namespace WeatherApp.ViewModels
@@ -30,14 +33,19 @@ namespace WeatherApp.ViewModels
 
         private void SaveConfiguration(string obj)
         {
-            /// TODO 04 : Les tâches manquantes sont dans les XAML.
-            /// TODO 04a : Sauvegarder la configuration
+            /// TODO 04 : Les tâches manquantes sont dans les XAML.//FAIT
+            /// TODO 04a : Sauvegarder la configuration//FAIT
+
+            Properties.Settings.Default.apiKey = ApiKey;
+            Properties.Settings.Default.Save();
+  
         }
+
 
         private string GetApiKey()
         {
-            /// TODO 05 : Retourner la configuration
-            return string.Empty;
+            /// TODO 05 : Retourner la configuration//FAIT
+            return Properties.Settings.Default.apiKey;
         }
 
     }

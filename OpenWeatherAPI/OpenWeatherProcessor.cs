@@ -3,6 +3,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using System.Windows;
 
 namespace OpenWeatherAPI
 {
@@ -103,7 +104,7 @@ namespace OpenWeatherAPI
         }
 
         private async Task<OWCurrentWeaterModel> doCurrentWeatherCall()
-        {            
+        {
             using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(longUrl))
             {
                 if (response.IsSuccessStatusCode)
@@ -112,7 +113,10 @@ namespace OpenWeatherAPI
                     return result;
                 }
 
-                return null;
+
+                OWCurrentWeaterModel invalidresult = await response.Content.ReadAsAsync<OWCurrentWeaterModel>();
+                return invalidresult;
+
 
             }
         }

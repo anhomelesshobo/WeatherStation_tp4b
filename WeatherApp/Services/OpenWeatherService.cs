@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WeatherApp.ViewModels;
 
 namespace WeatherApp.Services
@@ -16,18 +17,34 @@ namespace WeatherApp.Services
             owp = OpenWeatherProcessor.Instance;
             owp.ApiKey = apiKey;
         }
-        
+
         public async Task<TemperatureModel> GetTempAsync()
         {
             var temp = await owp.GetCurrentWeatherAsync();
 
-            var result = new TemperatureModel
+            if (temp.Cod == 401)
             {
-                DateTime = DateTime.UnixEpoch.AddSeconds(temp.DateTime),
-                Temperature = temp.Main.Temperature
-            };
+                MessageBox.Show("Please make sure your ApiKey is valid and authorized!");
+                return null;
+            }
+            else if(temp.Cod == 404)
+            {
+                MessageBox.Show("The city that you have enter is invalid!");
+                return null;
+            }
+            else 
+            {
+                var result = new TemperatureModel
+                {
+                    DateTime = DateTime.UnixEpoch.AddSeconds(temp.DateTime),
+                    Temperature = temp.Main.Temperature
+                };
 
-            return result;
+                return result;
+            }
+
+
+            
         }
 
         public void SetLocation(string location)

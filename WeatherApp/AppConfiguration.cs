@@ -29,6 +29,7 @@ namespace WeatherApp
                 optional: true,
                 reloadOnChange: true);
 
+            
             var devEnvVariable = Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT");
 
             var isDevelopment = string.IsNullOrEmpty(devEnvVariable) ||

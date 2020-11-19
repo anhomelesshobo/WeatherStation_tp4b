@@ -75,8 +75,15 @@ namespace WeatherApp.ViewModels
         /// <returns></returns>
         public bool CanGetTemp(string obj)
         {
+            if (Properties.Settings.Default.apiKey != null)
+            {
+                return TemperatureService != null;
+            }else
+            {
+                return false;
+            }
             
-            return TemperatureService != null;
+           
         }
 
         public void GetTemp(string obj)
